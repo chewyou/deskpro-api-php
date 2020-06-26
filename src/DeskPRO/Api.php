@@ -143,7 +143,7 @@ class Api
 		$this->setApiToken($api_token);
 
 		// Do a get request to /, to make sure it's a valid DeskPRO url
-		$this->call('GET', '/');
+		// $this->call('GET', '/');
 	}
 
 	/**
