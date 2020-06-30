@@ -341,9 +341,6 @@ class Api
 		if (!$response) {
 			throw new Exception\CoreException('Invalid DeskPRO URL: ' . $url);
 		}
-		
-		echo "\n\n\nResponse: ";
-        	echo $response;
 
 		do {
 			$header_end = strpos($response, "\r\n\r\n");
