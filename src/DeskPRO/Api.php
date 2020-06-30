@@ -267,6 +267,9 @@ class Api
 		}
 
 		$url = $this->_root . '/api/' . $end;
+		
+		echo "\n\n\nURL: ";
+		echo $url;
 
 		$method = strtoupper($method);
 		$has_files = $this->_hasFileUploads($params);
@@ -338,6 +341,9 @@ class Api
 		if (!$response) {
 			throw new Exception\CoreException('Invalid DeskPRO URL: ' . $url);
 		}
+		
+		echo "\n\n\nResponse: ";
+        	echo $response;
 
 		do {
 			$header_end = strpos($response, "\r\n\r\n");
