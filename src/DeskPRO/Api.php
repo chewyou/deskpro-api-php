@@ -364,14 +364,15 @@ class Api
 
 		$results = new Api\Result($headers, $body);
 		
-		echo "\n\n\n\n*************** API.PHP DEBUG Headers: ";
-        	echo $headers;
+		$testHeader_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+		$testTeader = substr($response, 0, $testHeader_size);
+		$testBody = substr($response, $testHeader_size);
 		
-		echo "\n\n\n\n*************** API.PHP DEBUG Body: ";
-        	echo $body;
+		echo "\n\n\n\n*************** API.PHP DEBUG testTeader: ";
+        	echo $testTeader;
 		
-		echo "\n\n\n\n*************** API.PHP DEBUG Results: ";
-        	echo $results;
+		echo "\n\n\n\n*************** API.PHP DEBUG testBody: ";
+        	echo $testBody;
 
 		if (!$results->isValidDeskPROResponse()) {
 			throw new Exception\CoreException('Not a valid DeskPRO response, Please check your $dp_root URL carefully');
