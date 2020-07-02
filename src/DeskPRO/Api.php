@@ -363,6 +363,15 @@ class Api
 		} while ($is_continue);
 
 		$results = new Api\Result($headers, $body);
+		
+		echo "\n\n\n\n*************** API.PHP DEBUG Headers: ";
+        	echo $headers;
+		
+		echo "\n\n\n\n*************** API.PHP DEBUG Body: ";
+        	echo $body;
+		
+		echo "\n\n\n\n*************** API.PHP DEBUG Results: ";
+        	echo $results;
 
 		if (!$results->isValidDeskPROResponse()) {
 			throw new Exception\CoreException('Not a valid DeskPRO response, Please check your $dp_root URL carefully');
