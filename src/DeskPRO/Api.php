@@ -267,9 +267,6 @@ class Api
 		}
 
 		$url = $this->_root . '/api/' . $end;
-		
-		echo "\n\n\nURL: ";
-		echo $url;
 
 		$method = strtoupper($method);
 		$has_files = $this->_hasFileUploads($params);
