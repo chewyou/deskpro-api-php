@@ -341,38 +341,12 @@ class Api
 		if (!$response) {
 			throw new Exception\CoreException('Invalid DeskPRO URL: ' . $url);
 		}
-		
-		echo "\n\n\nResponse: ";	
-        	echo $response;
 
-		do {
-			$header_end = strpos($response, "\r\n\r\n");
-			if ($header_end === false) {
-				$headers = $response;
-				$body = '';
-			} else {
-				$headers = substr($response, 0, $header_end);
-				$body = substr($response, $header_end + 4);
-			}
-			if (preg_match('#^HTTP/1.\d 100#', $headers)) {
-				$is_continue = true;
-				$response = $body;
-			} else {
-				$is_continue = false;
-			}
-		} while ($is_continue);
+       		$header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+        	$response_header = substr($response, 0, $header_size);
+        	$response_body = substr($response, $header_size);
 
-		$results = new Api\Result($headers, $body);
-		
-		$testHeader_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-		$testTeader = substr($response, 0, $testHeader_size);
-		$testBody = substr($response, $testHeader_size);
-		
-		echo "\n\n\n\n*************** API.PHP DEBUG testTeader: ";
-        	echo $testTeader;
-		
-		echo "\n\n\n\n*************** API.PHP DEBUG testBody: ";
-        	echo $testBody;
+		$results = new Api\Result($response_header, $response_body);
 
 		if (!$results->isValidDeskPROResponse()) {
 			throw new Exception\CoreException('Not a valid DeskPRO response, Please check your $dp_root URL carefully');
